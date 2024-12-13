@@ -28,7 +28,7 @@
                 {
                     "name": "",
                     "id": "5eaef080-0b2b-4fd3-98ed-a1813b627160",
-                    "path": "",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -150,6 +150,17 @@
                     "name": "",
                     "id": "bc1cf2c5-15e1-4a5a-8826-26d78995e1f1",
                     "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "00a1750b-d272-40ad-9a1e-0aa53dd2faab",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

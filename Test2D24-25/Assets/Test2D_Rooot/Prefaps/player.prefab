@@ -188,8 +188,14 @@ MonoBehaviour:
   playerRb: {fileID: 4309335064813280270}
   playerInput: {fileID: 0}
   speed: 7
+  isFacingRight: 0
   jumpForce: 5
   isGrounded: 0
+  groundCheck: {fileID: 5231972346484688432}
+  groundCheckRadius: 0.1
+  groundCheckLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &8757651473459528269
 MonoBehaviour:
   m_ObjectHideFlags: 0

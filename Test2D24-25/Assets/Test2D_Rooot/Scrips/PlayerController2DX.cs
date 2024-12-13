@@ -12,12 +12,14 @@ public class PlayerController2DX : MonoBehaviour
 
     [Header("Movement Parameters")]
     public float speed;
+    [SerializeField] bool isFacingRight;
 
     [Header("Jump Parameters")]
     public float jumpForce;
     [SerializeField] bool isGrounded;
-
-
+    [SerializeField] GameObject groundCheck;
+    [SerializeField] float groundCheckRadius;
+    [SerializeField] LayerMask groundCheckLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +27,15 @@ public class PlayerController2DX : MonoBehaviour
         //Para autoreferenciar: nombre de variable = GetComponent<tipo de variable>()
         playerRb = GetComponent<Rigidbody2D>();
         playerInput = GetComponent<PlayerInput>();
+        isFacingRight = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        GroundCheck();
+        if (moveInput.x > 0 && !isFacingRight) Flip();
+        if (moveInput.x < 0 && isFacingRight) Flip();
     }
 
     private void FixedUpdate()
@@ -41,6 +46,20 @@ public class PlayerController2DX : MonoBehaviour
     void Movement()
     {
         playerRb.velocity = new Vector3(moveInput.x * speed, playerRb.velocity.y, 0);
+    }
+
+    void Flip()
+    {
+        Vector3 currentScale = transform.localScale;
+        currentScale.x *= -1;
+        transform.localScale = currentScale;
+        isFacingRight = !isFacingRight;
+    }
+    void GroundCheck()
+    {
+        //isGrounded es verdadero cuando el circulo detector toque la layer ground
+        isGrounded = Physics2D.OverlapCircle(groundCheck.transform.position, groundCheckRadius, groundCheckLayer);
+
     }
 
     #region Input Methods
@@ -57,7 +76,11 @@ public class PlayerController2DX : MonoBehaviour
     {
         if (context.started)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            if (isGrounded) 
+            {
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+            }
+           
         }
 
     }
